@@ -9,6 +9,11 @@ class Patient < ActiveRecord::Base
         Doctor.all.filter{|doctor| doctor.specialty == self.condition}
     end
 
+    def patint_info
+    #name of patient and condition
+    "#{self.name} has #{self.condition}"
+    end
+
     # Patient.first.doctor
         # calling .first because it is an instance method and method is called on each instance.
 end

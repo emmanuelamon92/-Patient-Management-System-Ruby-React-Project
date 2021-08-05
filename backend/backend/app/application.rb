@@ -24,11 +24,10 @@ class Application
     elsif req.path.match(/patients/) && req.post?
       data = JSON.parse(req.body.read)
       patient_in = Patient.find_by(first_name: data["first_name"], last_name: data["last_name"])
+      patient_cond = Condition.find_by(name: data["condition"])
       if !patient_in
-        Patient.create(first_name: data["first_name"], last_name: data["last_name"], condition: data["condition"], is_admitted: true)
-        # patient = Patient.create(data)
+        Patient.create(first_name: data["first_name"], last_name: data["last_name"], conditions:[patient_cond], is_admitted: true)
         req_patient = {id: Patient.last["id"], first_name: data["first_name"], last_name: data["last_name"], condition: data["condition"], is_admitted: true}
-        # req_patient = {id: patient.id, first_name: patient.first_name, last_name: patient.last_name, condition: patient.condition, is_admitted: true}
         return [200, { 'Content-Type' => 'application/json' }, [ {:patient => req_patient, :message => "Patient has been added!" }.to_json ]] 
         # "#{Patient.last["first_name"]} has been added!"
       else
