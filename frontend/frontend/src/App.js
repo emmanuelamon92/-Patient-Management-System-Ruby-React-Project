@@ -118,9 +118,9 @@ const getAllPatients = () => {
   
 
   return (
-    <div>
+    <div id="shadow">
+      <Heading />
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Heading />
         <input {...register("first_name")} placeholder="First name" autoComplete="off"/>
         <input {...register("last_name")} placeholder="Last name" autoComplete="off"/>
         <select {...register("condition")}>
