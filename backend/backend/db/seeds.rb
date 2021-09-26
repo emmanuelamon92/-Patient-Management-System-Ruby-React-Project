@@ -8,7 +8,7 @@ condition_hash = [{name: 'Covid', severe: true}, {name: 'Neurological', severe: 
 doctor_hash = [{name: 'Bill', specialty: 'Covid'}, {name: 'Tanya', specialty: 'Neurological'}, {name: 'Toby', specialty: 'Respitory'}, {name: 'Alice', specialty: 'Cardiovascular'}, {name: 'Bret', specialty: 'General'}]
 
 10.times do
-    Patient.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, condition: condition_hash.sample[:name], is_admitted: true)
+    Patient.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, condition: condition_hash[:name], is_admitted: true)
 end
 
 condition_hash.each do |condition|
