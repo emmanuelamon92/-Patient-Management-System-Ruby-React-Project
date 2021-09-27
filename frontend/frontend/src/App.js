@@ -13,8 +13,9 @@ export default function App() {
   const [patients, setPatients] = useState({})
   const [response, setResponse] = useState({})
 
-  console.log(patients.data)
-  console.log(patients)
+  console.log('1 console patients.data', patients.data)
+  console.log('2 console patients', patients)
+  console.log('3 console response.patient', response.patient)
 
 
 //<--- POST REQUEST FROM USER INPUT FORM TO DATABASE PORT:9292 /PATIENTS/ ENDPOINT START ---> 
@@ -27,10 +28,14 @@ export default function App() {
           "Content-Type": "application/json",
           "Accepts": "application/json"
       },
-    body: JSON.stringify(data)
+      body: JSON.stringify(data)
+    
     })
     .then(res => res.json())
-    .then(data => {
+      .then(data => {
+        console.log('onSubmit data.patient', data.patient)
+        console.log('onSubmit data', data)
+        
       setResponse(data)
     })
   };
@@ -54,14 +59,14 @@ const postPatientAddedOrError = () => {
   )}
 
   const postAllPatients = () => {
-    console.log("we in there")
+    console.log('response', response)
     if (patients.data !== undefined) {
       return patients.data.map(patient => {
         // setPatientId(patient.id)
         return (
           //value of button equals id of patient
           <div className='user-card'>
-            <h3>{patient.id}</h3>
+            {/* <h3>{patient.id}</h3> */}
             <h3>{patient.first_name} {patient.last_name}</h3>
             <h3>{patient.condition}</h3>
             <h3>{patient.is_admitted}</h3>
@@ -118,7 +123,7 @@ const getAllPatients = () => {
   
 
   return (
-    <div id="shadow">
+    <div>
       <Heading />
       <form onSubmit={handleSubmit(onSubmit)}>
         <input {...register("first_name")} placeholder="First name" autoComplete="off"/>
